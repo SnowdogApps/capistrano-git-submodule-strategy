@@ -42,7 +42,7 @@ class Capistrano::Git
             git :remote, 'set-url', 'origin', repo_url
           end
         else
-          context.execute("find #{release_path} -name '.git*' | xargs -I {} rm -rfv '{}'")
+          context.execute("find #{release_path} -name '.git*' | xargs -I {} rm -rfv '{}' > /dev/null")
         end
       end
     end
