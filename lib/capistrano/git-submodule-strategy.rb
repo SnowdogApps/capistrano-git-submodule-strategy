@@ -10,12 +10,7 @@ class Capistrano::Git
     end
 
     def check
-      unless test!(:git, :'ls-remote', repo_url)
-        context.error "Repo `#{repo_url}` does not exists"
-        return false
-      end
-
-      if context.capture(:git, :'ls-remote', repo_url).split("\n").select{ |i| i.include?("refs/heads/#{fetch(:branch)}") }.empty?
+      if context.capture(:git, :'ls-remote', repo_url, :branch).empty?
         context.error "Branch `#{fetch(:branch)}` not found in repo `#{repo_url}`"
         return false
       end
