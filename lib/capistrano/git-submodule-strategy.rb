@@ -10,7 +10,7 @@ class Capistrano::Git
     end
 
     def check
-      if context.capture(:git, :'ls-remote', repo_url, :branch).empty?
+      if context.capture(:git, :'ls-remote', repo_url, fetch(:branch)).empty?
         context.error "Branch `#{fetch(:branch)}` not found in repo `#{repo_url}`"
         return false
       end
